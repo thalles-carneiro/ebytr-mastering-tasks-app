@@ -1,0 +1,30 @@
+{
+  "name": "ebytr-mastering-tasks-app",
+  "version": "1.0.0",
+  "description": "Mastering Tasks App for Ebytr",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node backend/server.js",
+    "server": "nodemon backend/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thalles-carneiro/ebytr-mastering-tasks-app.git"
+  },
+  "keywords": [],
+  "author": "Thalles Carneiro",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thalles-carneiro/ebytr-mastering-tasks-app/issues"
+  },
+  "homepage": "https://github.com/thalles-carneiro/ebytr-mastering-tasks-app#readme",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "express": "^4.17.2",
+    "mongoose": "^6.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
