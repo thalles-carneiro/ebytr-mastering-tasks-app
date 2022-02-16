@@ -4,7 +4,7 @@
   "description": "Mastering Tasks App for Ebytr",
   "main": "server.js",
   "scripts": {
-    "test": "mocha --recursive --exit",
+    "test": "mocha backend/tests/ --recursive --watch",
     "start": "node backend/server.js",
     "server": "nodemon backend/server.js",
     "lint": "eslint --no-inline-config --ext .js,.jsx --no-error-on-unmatched-pattern -c .eslintrc.json ."
