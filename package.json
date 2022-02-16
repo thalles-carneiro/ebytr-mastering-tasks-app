@@ -6,7 +6,8 @@
   "scripts": {
     "test": "mocha --recursive --exit",
     "start": "node backend/server.js",
-    "server": "nodemon backend/server.js"
+    "server": "nodemon backend/server.js",
+    "lint": "eslint --no-inline-config --ext .js,.jsx --no-error-on-unmatched-pattern -c .eslintrc.json ."
   },
   "repository": {
     "type": "git",
@@ -26,6 +27,7 @@
   },
   "devDependencies": {
     "chai": "^4.3.6",
+    "eslint-config-trybe-backend": "^1.0.4",
     "mocha": "^9.2.0",
     "nodemon": "^2.0.15",
     "sinon": "^13.0.1"
