@@ -8,6 +8,8 @@ O intuito é implementar um sistema capaz de auxiliar as pessoas colaboradoras a
 
 A aplicação visa centralizar as tarefas de uma pessoa colaboradora. De início, iremos criar os testes e implementar as funcionalidades para a página de tarefas.
 
+### [Figma do Projeto Mastering Tasks](https://www.figma.com/file/gFtJkvWcqzfZ8ZQ7SD7t2n/Mastering-Tasks-%7C-Ebytr?node-id=0%3A1)
+
 ---
 ---
 
@@ -15,10 +17,10 @@ A aplicação visa centralizar as tarefas de uma pessoa colaboradora. De início
 
 A API consta com 8 endpoints:
 
-- `/login` ---> [`POST`]
-- `/register` ---> [`POST`]
+- `/login` ---> [`POST`] (em construção...)
+- `/register` ---> [`POST`] (em construção...)
 
-- `/users` ---> Rota que lida com pessoas usuárias
+- `/users` ---> Rota que lida com pessoas usuárias (em construção...)
   - `/` ---> [`POST`] Cria uma nova pessoa usuária
   - `/:id` ---> [`GET`] Pega a pessoa usuária por id
 
@@ -42,7 +44,7 @@ O projeto será desenvolvido em TDD, inicialmente com testes unitários, e poste
 
   - Servidor: `NodeJS com Express`
 
-  - Autorização: `JSON Web Token`
+  - Autorização: `JSON Web Token` (em construção...)
 
   - Bando de Dados: `MongoDB com Mongoose`
 
@@ -52,7 +54,7 @@ O projeto será desenvolvido em TDD, inicialmente com testes unitários, e poste
 
   - Cliente: `React com Vite`
 
-  - Estilização: `Bootstrap`
+  - Estilização: `Bootstrap` (em construção...)
 
   - Testes Unitátios: `RTL`
 
