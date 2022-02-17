@@ -15,7 +15,8 @@ const add = async (req, res) => {
 };
 
 const update = async (req, res) => {
-  const { id, task } = req.body;
+  const { id } = req.params;
+  const { task } = req.body;
 
   const updatedTask = await TaskService.update(id, task);
 
@@ -23,7 +24,7 @@ const update = async (req, res) => {
 };
 
 const remove = async (req, res) => {
-  const { id } = req.body;
+  const { id } = req.params;
 
   const deletedTask = await TaskService.delete(id);
 
