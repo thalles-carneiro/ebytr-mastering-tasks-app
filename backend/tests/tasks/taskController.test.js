@@ -77,7 +77,8 @@ describe('Task Controller tests', () => {
     const next = () => {};
 
     beforeEach(async () => {
-      request.body = { id: newTask._id, task: 'Task One' };
+      request.body = { task: 'Task One' };
+      request.params = newTask._id;
 
       response.status = sinon.stub().returns(response);
       response.json = sinon.stub().returns();
@@ -108,7 +109,7 @@ describe('Task Controller tests', () => {
     const next = () => {};
 
     beforeEach(async () => {
-      request.body = { id: newTask._id };
+      request.params = newTask._id;
 
       response.status = sinon.stub().returns(response);
       response.json = sinon.stub().returns();
