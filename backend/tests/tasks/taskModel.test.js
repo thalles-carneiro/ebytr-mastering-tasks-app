@@ -1,10 +1,11 @@
 const sinon = require('sinon');
 const { expect } = require('chai');
-const { Types: { ObjectId } } = require('mongoose');
 
 const db = require('../../src/models/db');
 const TaskModel = require('../../src/models/tasks');
+
 const { getConnection } = require('../mocks/connection');
+const { newTask, newTaskList } = require('../mocks/tasksData');
 
 const TASKS = 'tasks';
 
@@ -21,64 +22,39 @@ describe('Task Model tests', () => {
     await dbMock.close();
   });
 
-  describe('Create task', async () => {
-    const taskMock = {
-      _id: new ObjectId('61a29c5299147450808a575f'),
-      task: 'Tarefa 1',
-      createdAt: new Date.now(),
-      updatedAt: new Date.now(),
-      status: 'Pendente',
-    };
-
+  describe('Create task', () => {
     beforeEach(async () => {
-      await dbMock.collection(TASKS).insertOne(taskMock);
-    });
+      await dbMock.collection(TASKS).insertOne(newTask);
+    })
 
     afterEach(async () => {
       await dbMock.collection(TASKS).deleteMany({});
     });
 
     it('a task is an object', async () => {
-      const task = await TaskModel.add({ task: 'Tarefa 2' });
+      const task = await TaskModel.add('Tarefa 2');
 
       expect(task).to.be.an('object');
     });
 
     it('the task was created with the correct values', async () => {
-      const task = await TaskModel.add({ task: 'Tarefa 2' });
+      const task = await TaskModel.add('Tarefa 2');
 
-      expect(task).to.haveOwnProperty('task', 'Tarefa 2');
-      expect(task).to.haveOwnProperty('status', 'Pendente');
+      expect(task).to.have.property('task', 'Tarefa 2');
+      expect(task).to.have.property('status', 'Pendente');
     });
 
     it('the task has been added to the collection', async () => {
-      await TaskModel.add({ task: 'Tarefa 2' });
+      await TaskModel.add('Tarefa 2');
       const tasks = await dbMock.collection(TASKS).find().toArray();
 
       expect(tasks).to.have.length(2);
     });
   });
 
-  describe('Get tasks', async () => {
-    const tasksMock = [
-      {
-        _id: new ObjectId('61a29c147450808a575f5299'),
-        task: 'Tarefa 1',
-        createdAt: new Date.now(),
-        updatedAt: new Date.now(),
-        status: 'Pendente',
-      },
-      {
-        _id: new ObjectId('c529914745061a29808a575f'),
-        task: 'Tarefa 2',
-        createdAt: new Date.now(),
-        updatedAt: new Date.now(),
-        status: 'Pendente',
-      },
-    ];
-
+  describe('Get tasks', () => {
     beforeEach(async () => {
-      await dbMock.collection(TASKS).insertMany(tasksMock);
+      await dbMock.collection(TASKS).insertMany(newTaskList);
     });
 
     afterEach(async () => {
@@ -101,23 +77,15 @@ describe('Task Model tests', () => {
       const tasks = await TaskModel.getAll();
 
       tasks.forEach((task, index) => {
-        expect(task).to.haveOwnProperty('task', tasksMock[index].task);
-        expect(task).to.haveOwnProperty('status', tasksMock[index].status);
+        expect(task).to.have.property('task', newTaskList[index].task);
+        expect(task).to.have.property('status', newTaskList[index].status);
       })
     });
   });
 
-  describe('Update task', async () => {
-    const taskMock = {
-      _id: new ObjectId('61a29c5299147450808a575f'),
-      task: 'Tarefa 1',
-      createdAt: new Date.now(),
-      updatedAt: new Date.now(),
-      status: 'Pendente',
-    };
-
+  describe('Update task', () => {
     beforeEach(async () => {
-      await dbMock.collection(TASKS).insertOne(taskMock);
+      await dbMock.collection(TASKS).insertOne(newTask);
     });
 
     afterEach(async () => {
@@ -126,27 +94,19 @@ describe('Task Model tests', () => {
 
     it('the task was updated', async () => {
       await TaskModel.update(
-        taskMock._id,
-        { task: 'Task One' },
+        newTask._id,
+        'Task One',
       );
 
-      const updatedTask = await dbMock.collection(TASKS).findById(taskMock._id);
+      const updatedTask = await dbMock.collection(TASKS).findOne({ _id: newTask._id });
 
-      expect(updatedTask).to.haveOwnProperty('task', 'Task One');
+      expect(updatedTask).to.have.property('task', 'Task One');
     });
   });
 
-  describe('Delete task', async () => {
-    const taskMock = {
-      _id: new ObjectId('61a29c5299147450808a575f'),
-      task: 'Tarefa 1',
-      createdAt: new Date.now(),
-      updatedAt: new Date.now(),
-      status: 'Pendente',
-    };
-
+  describe('Delete task', () => {
     beforeEach(async () => {
-      await dbMock.collection(TASKS).insertOne(taskMock);
+      await dbMock.collection(TASKS).insertOne(newTask);
     });
 
     afterEach(async () => {
@@ -154,9 +114,9 @@ describe('Task Model tests', () => {
     });
 
     it('the task was deleted', async () => {
-      await TaskModel.delete(taskMock._id);
+      await TaskModel.delete(newTask._id);
 
-      const deletedTask = await dbMock.collection(TASKS).findById(taskMock._id);
+      const deletedTask = await dbMock.collection(TASKS).findOne({ _id: newTask._id });
 
       expect(deletedTask).to.be.null;
     });
